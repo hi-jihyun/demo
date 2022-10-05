@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/lib/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        function checkAccount(){
+            var loginfForm = $("form[name=loginfForm]");
+            loginfForm.submit();
+        };
+
+    </script>
+</head>
+<body>
+<form name='loginfForm' action="/loginProcess" method="POST" >
+   사용자타입 (B 또는 C입력) <input type="text" name="loginUserType" value="B"/><br>
+    <div>
+        <label>
+            <span >아이디</span>
+            <input type="text" name="userId"  maxlength="46"
+                   onkeypress="if(event.keyCode==13){checkAccount()}"/>
+            <br>
+        </label>
+        <label>
+            <span >비밀번호</span>
+            <input type="password" name="password" placeholder="비밀번호를 입력해주세요" maxlength="15"
+                   onkeypress="if(event.keyCode==13){checkAccount()}"/>
+        </label>
+        <button type="button" onclick="checkAccount();">로그인</button>
+    </div>
+</form>
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+
+        var error="[(${error})]";
+        if(error!=""){
+            alert(error);
+
+        }
+    </script>
+</th:block>
+</body>
+</html>
